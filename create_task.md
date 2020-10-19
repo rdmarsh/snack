@@ -55,5 +55,5 @@ Options:
   --version                 Show the version and exit.
   --help                    Show this message and exit.
 
-  default config file: ~/.snart/config.ini
+  default config file: ~/.snack/config.ini
 ```

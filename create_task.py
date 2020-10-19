@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-#    snart Service Now API Retrieval Tool
+#    snack SNow Agile Cli Kludge
 #    Copyright (C) 2020 David Marsh
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -17,17 +17,17 @@
 #    along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 """
-snart Service Now API Retrieval Tool: create_task
+snack SNow Agile Cli Kludge
 """
 
-__project__ = 'snart'
+__project__ = 'snack'
 __appname__ = 'create_task'
-__appdesc__ = 'Service Now Agile Retrieval Tool: create_task'
-__version__ = '0.2'
+__appdesc__ = 'Creates one or more tasks for the supplied story'
+__version__ = '0.3'
 __author__ = 'David Marsh'
 __license__ = 'GPLv3'
 __copyright__ = 'Copyright 2020 David Marsh'
-__url__ = 'https://github.com/rdmarsh/snart'
+__url__ = 'https://github.com/rdmarsh/snack'
 
 import os
 import sys
