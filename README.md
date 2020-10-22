@@ -24,7 +24,7 @@ TODO: how to install
 Usage
 -----
 
-* `create_task.py --help`
+* `create_task.py --help`, see [`create_task.md`](create_task.md)
 
 
 Code of Conduct
