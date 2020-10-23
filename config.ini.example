@@ -1,7 +1,31 @@
+# copy this file to ~/.snack/config.ini and change as needed
+
+# All these can be passed from the cli, but be aware that they will show in
+# the shell history. As user informatios doesn't change much suppling them here is
+# more convieneant. The password flag if blank will prompt for the password.
+#
+# Any cli flag can be passed in the config file.
+# Suppling options here will override the cli defaults.
+#
 # config files use unrepr format
 # https://configobj.readthedocs.io/en/latest/configobj.html#unrepr-mode
-# copy this file to ~/.snack/config.ini and change as needed
 
 instance = "instance"
 user = "user"
 password = "password"
+
+#story: "STRY0123456"
+#story_sys_id: "01234567890123456789012345678901"
+#assigned_to: "01234567890123456789012345678901"
+#assignment_group: "01234567890123456789012345678901"
+#short_description: "Short description is the title"
+#description: "Longer description to be added"
+#comments: "This is a comment"
+#state: 0
+#type_: 1
+#priority: 4
+#planned_hours: 1
+#blocked: False
+#blocked_reason: None
+#quantity: 1
+#noprompt: False
