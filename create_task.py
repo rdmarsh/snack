@@ -157,6 +157,10 @@ def create_task(instance, user, password, assigned_to, assignment_group,
                     fg='red', err=True)
         sys.exit(1)
 
+    logging.info('instance: %s', instance)
+    logging.info('user: %s', user)
+    logging.info('password: %s', '[REDACTED]')
+
     # change DRAFT state back to '-6', because asking a user to enter a negative number is ugly
     if state == 0:
         state = -6
