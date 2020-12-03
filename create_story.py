@@ -23,7 +23,7 @@ snack SNow Agile Cli Kludge
 __project__ = 'snack'
 __appname__ = 'create_story'
 __appdesc__ = 'Creates one or more stories, optionally for the supplied sprint'
-__version__ = '0.1'
+__version__ = '0.2'
 __author__ = 'David Marsh'
 __license__ = 'GPLv3'
 __copyright__ = 'Copyright 2020 David Marsh'
@@ -73,6 +73,10 @@ config_file = os.path.join(click.get_app_dir(__project__, force_posix=True), 'co
 @click.option('-c', '--comment', 'comments',
               help='comments to add to the story')
 
+@click.option('-r', '--criteria', 'acceptance_criteria',
+              default='acceptance criteria to be added', show_default=True,
+              help='acceptance criteria to add to the story')
+
 @click.option('-b', '--blocked', 'blocked_reason',
               metavar='REASON',
               help='create task as blocked and supply a reason')
@@ -95,7 +99,7 @@ config_file = os.path.join(click.get_app_dir(__project__, force_posix=True), 'co
 @click.version_option(version=__version__)
 
 def create_story(instance, user, password, assigned_to, assignment_group,
-                short_description, description, comments, sprint,
+                short_description, description, comments, acceptance_criteria, sprint,
                 blocked_reason, quantity, noprompt, verbose):
     """Creates one or more stories, optionally for the supplied sprint"""
 
@@ -207,6 +211,7 @@ def create_story(instance, user, password, assigned_to, assignment_group,
     logging.info('short_description: %s', short_description)
     logging.info('description: %s', description)
     logging.info('comments: %s', comments)
+    logging.info('acceptance_criteria: %s', acceptance_criteria)
     logging.info('blocked: %s', blocked)
     logging.info('blocked_reason: %s', blocked_reason)
     logging.info('quantity: %s', quantity)
@@ -236,6 +241,7 @@ def create_story(instance, user, password, assigned_to, assignment_group,
             "sprint": sprint_sys_id,
             "description": description,
             "comments": comments,
+            "acceptance_criteria": acceptance_criteria,
             "blocked": blocked,
             "blocked_reason": blocked_reason,
         }
