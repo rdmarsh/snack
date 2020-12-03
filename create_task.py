@@ -225,7 +225,7 @@ def create_task(instance, user, password, assigned_to, assignment_group,
     # make task plural if more than one
     ess = 's' if quantity > 1 else ''
 
-    click.secho("Creating {} task{} to story {}".format(quantity, ess, story),
+    click.secho("Creating {} task{} for story {}".format(quantity, ess, story),
                 fg='blue', err=False)
 
     if not noprompt:
