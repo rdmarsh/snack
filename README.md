@@ -14,6 +14,7 @@ Contents
 Components
 ----------
 
+* `create_story.py` - Creates one or more stories, optionally for the supplied sprint
 * `create_task.py` - Creates one or more tasks for the supplied story
 
 Installation
@@ -24,6 +25,7 @@ TODO: how to install
 Usage
 -----
 
+* `create_story.py --help`, see [`create_story.md`](create_story.md)
 * `create_task.py --help`, see [`create_task.md`](create_task.md)
 
 
