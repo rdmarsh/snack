@@ -124,7 +124,7 @@ config_file = os.path.join(click.get_app_dir(__project__, force_posix=True), 'co
               type=int,
               default=1, show_default=True,
               help="""quantity of tasks to create. Creates multiples of
-                      exactly the same task. Useful for adding tasks in
+                      exactly the same task. Useful for creating tasks in
                       bulk that can be updated later """)
 
 @click.option('-N', '--noprompt',
@@ -225,7 +225,7 @@ def create_task(instance, user, password, assigned_to, assignment_group,
     # make task plural if more than one
     ess = 's' if quantity > 1 else ''
 
-    click.secho("Adding {} task{} to story {}".format(quantity, ess, story),
+    click.secho("Creating {} task{} to story {}".format(quantity, ess, story),
                 fg='blue', err=False)
 
     if not noprompt:
