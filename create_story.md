@@ -25,12 +25,12 @@ Options:
   -r, --criteria TEXT      acceptance criteria to add to the story  [default:
                            acceptance criteria to be added]
 
-  -b, --blocked REASON     create task as blocked and supply a reason
+  -b, --blocked REASON     create story as blocked and supply a reason
   -q, --quantity INTEGER   quantity of stories to create. Creates multiples of
                            exactly the same story. Useful for adding stories
                            in bulk that can be updated later   [default: 1]
 
-  -N, --noprompt           create task without prompting the user
+  -N, --noprompt           create story without prompting the user
   -v, --verbose            Be more verbose, -v is INFO, -vv is DEBUG
   --version                Show the version and exit.
   --help                   Show this message and exit.

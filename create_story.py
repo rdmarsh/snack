@@ -79,7 +79,7 @@ config_file = os.path.join(click.get_app_dir(__project__, force_posix=True), 'co
 
 @click.option('-b', '--blocked', 'blocked_reason',
               metavar='REASON',
-              help='create task as blocked and supply a reason')
+              help='create story as blocked and supply a reason')
 
 @click.option('-q', '--quantity',
               type=int,
@@ -90,7 +90,7 @@ config_file = os.path.join(click.get_app_dir(__project__, force_posix=True), 'co
 
 @click.option('-N', '--noprompt',
               is_flag=True,
-              help='create task without prompting the user')
+              help='create story without prompting the user')
 
 @click.option('-v', '--verbose',
               count=True,
