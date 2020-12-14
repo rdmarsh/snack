@@ -23,7 +23,7 @@ snack SNow Agile Cli Kludge
 __project__ = 'snack'
 __appname__ = 'create_story'
 __appdesc__ = 'Creates one or more stories, optionally for the supplied sprint'
-__version__ = '0.2'
+__version__ = '0.3'
 __author__ = 'David Marsh'
 __license__ = 'GPLv3'
 __copyright__ = 'Copyright 2020 David Marsh'
@@ -77,6 +77,64 @@ config_file = os.path.join(click.get_app_dir(__project__, force_posix=True), 'co
               default='acceptance criteria to be added', show_default=True,
               help='acceptance criteria to add to the story')
 
+@click.option('-O', '--product', 'product',
+              default='Associate story with a product')
+
+@click.option('-R', '--release', 'release',
+              default='Associate story with a release')
+
+@click.option('-D', '--demand', 'demand',
+              default='Associate story with a demand')
+
+@click.option('-J', '--project', 'project',
+              default='Associate story with a project')
+
+@click.option('-M', '--theme', 'theme',
+              default='Associate story with a theme')
+
+@click.option('-E', '--epic', 'epic',
+              default='Associate story with a epic')
+
+@click.option('-S', '--state',
+              type=click.Choice(['0', '1', '2', '3', '4', '5', '6', '7']),
+              default='0', show_default=True,
+              help="""state of task:
+
+                   \b
+                   0 - Draft
+                   1 - Ready
+                   2 - Work in progress
+                   3 - Complete
+                   4 - Cancelled
+                   5 - Ready for testing
+                   6 - Testing
+                   7 - On hold
+                   """)
+
+@click.option('-T', '--type', 'type_',
+              type=click.Choice(['0', '1', '2', '3']),
+              default='1', show_default=True,
+              help="""type of task:
+
+                   \b
+                   0 - None
+                   1 - Development
+                   2 - Documentation
+                   3 - Spike
+                   """)
+
+@click.option('-P', '--priority',
+              type=click.Choice(['1', '2', '3', '4']),
+              default='4', show_default=True,
+              help="""priority of task:
+
+                   \b
+                   1 - Critical
+                   2 - High
+                   3 - Moderate
+                   4 - Low
+                   """)
+
 @click.option('-b', '--blocked', 'blocked_reason',
               metavar='REASON',
               help='create story as blocked and supply a reason')
@@ -100,7 +158,10 @@ config_file = os.path.join(click.get_app_dir(__project__, force_posix=True), 'co
 
 def create_story(instance, user, password, assigned_to, assignment_group,
                 short_description, description, comments, acceptance_criteria, sprint,
-                blocked_reason, quantity, noprompt, verbose):
+                blocked_reason, quantity, noprompt, verbose,
+                product, release, demand, project, theme, epic,
+                state, type_, priority
+                ):
     """Creates one or more stories, optionally for the supplied sprint"""
 
     if verbose >= 2:
@@ -120,6 +181,31 @@ def create_story(instance, user, password, assigned_to, assignment_group,
     logging.info('instance: %s', instance)
     logging.info('user: %s', user)
     logging.info('password: %s', '[REDACTED]')
+
+    # change DRAFT state back to '-6', because asking a user to enter a negative number is ugly
+    if state == 0:
+        state = -6
+
+    # change READY FOR TESTING state back to '-7', because asking a user to enter a negative number is ugly
+    if state == 5:
+        state = -7
+
+    # change TESTING state back to '-8', because asking a user to enter a negative number is ugly
+    if state == 6:
+        state = -8
+
+    # change ON HOLD state back to '-20', because asking a user to enter a negative number is ugly
+    if state == 7:
+        state = -20
+
+    # change type_ back to a text value
+    types = {
+        "0": "",
+        "1": "Development",
+        "2": "Documentation",
+        "3": "Spike"
+    }
+    type_ = types[type_]
 
     # if supplied a blocked_reason, set blocked to True, else False
     blocked = bool(blocked_reason)
@@ -165,8 +251,8 @@ def create_story(instance, user, password, assigned_to, assignment_group,
         logging.info('group_sys_id: %s', group_sys_id)
 
     if sprint:
-        # check the sprint supplied exists, save sys_id, assigned_to, assignment_group and state for later
-        sprint_fields = ['sys_id', 'assigned_to', 'assignment_group', 'state']
+        # check the sprint supplied exists, save sys_id and assignment_group for later
+        sprint_fields = ['sys_id', 'assignment_group']
         logging.debug('sprint_fields: %s', sprint_fields)
 
         sprint_query = {'number': sprint}
@@ -212,6 +298,14 @@ def create_story(instance, user, password, assigned_to, assignment_group,
     logging.info('description: %s', description)
     logging.info('comments: %s', comments)
     logging.info('acceptance_criteria: %s', acceptance_criteria)
+    logging.info('product: %s', product)
+    logging.info('release: %s', release)
+    logging.info('demand: %s', demand)
+    logging.info('project: %s', project)
+    logging.info('theme: %s', theme)
+    logging.info('epic: %s', epic)
+    logging.info('type_: %s', type_)
+    logging.info('priority: %s', priority)
     logging.info('blocked: %s', blocked)
     logging.info('blocked_reason: %s', blocked_reason)
     logging.info('quantity: %s', quantity)
@@ -242,6 +336,15 @@ def create_story(instance, user, password, assigned_to, assignment_group,
             "description": description,
             "comments": comments,
             "acceptance_criteria": acceptance_criteria,
+            "product": product,
+            "release": release,
+            "demand": demand,
+            "project": project,
+            "theme": theme,
+            "epic": epic,
+            "state": state,
+            "type": type_,
+            "priority": priority,
             "blocked": blocked,
             "blocked_reason": blocked_reason,
         }
